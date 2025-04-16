@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
+      color: #333;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .overlay {
+      background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.9));
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 60px auto;
+      background: white;
+      padding: 50px 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 56px;
+      color: #b71c1c;
+      margin: 0 0 20px;
+    }
+
+    .couple-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: #b71c1c;
+      margin: 10px 0 25px;
+    }
+
+    p {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .rsvp-button {
+      display: inline-block;
+      padding: 14px 30px;
+      font-size: 20px;
+      color: white;
+      background: #d81b60;
+      text-decoration: none;
+      border-radius: 30px;
+      margin-top: 30px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .rsvp-button:hover {
+      background: #ad1457;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 30px 15px;
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .couple-name {
+        font-size: 40px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  
+  <div class="container">
+    <h1>You’re Invited!</h1>
+    <p>We would be honored to have you celebrate our special day with us.</p>
+    <h2 class="couple-name">Fanie & Triston</h2>
+    <p><strong>Date:</strong> November 1, 2025</p>
+    <p><strong>Time:</strong> 11:30 AM</p>
+    <p><strong>Location:</strong> 392 Notre Dame, Montebello, Quebec, Canada J0V 1L0</p>
+    <p>We can't wait to celebrate with you!</p>
+    <!-- Link to RSVP page -->
+    <a href="rsvp.html" class="rsvp-button">RSVP Here</a>
+  </div>
+</body>
+</html>
+
+
+
