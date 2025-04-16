@@ -1,10 +1,10 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
-    color: #333;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
+  color: #333;
+  min-height: 100vh; /* allows content to expand the page height */
+  position: relative;
+  overflow-x: hidden; /* allows vertical scroll but hides horizontal overflow */
 }
