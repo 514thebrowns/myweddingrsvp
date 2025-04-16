@@ -18,6 +18,136 @@
       color: #333;
       min-height: 100vh;
       display: flex;
+      justify-content: center;
+      flex-direction: column;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.94);
+      max-width: 720px;
+      padding: 50px 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #d81b60;
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      font-size: 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      z-index: 3;
+    }
+
+    .toggle-btn:hover {
+      background: #ad1457;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 56px;
+      color: #b71c1c;
+      margin-bottom: 20px;
+    }
+
+    .couple-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: #b71c1c;
+      margin: 10px 0 25px;
+    }
+
+    p {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .rsvp-button {
+      display: inline-block;
+      padding: 14px 30px;
+      font-size: 20px;
+      color: white;
+      background: #d81b60;
+      text-decoration: none;
+      border-radius: 30px;
+      margin-top: 30px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .rsvp-button:hover {
+      background: #ad1457;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 30px 15px;
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .couple-name {
+        font-size: 40px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+    }
+
+    /* Snow container and animation */
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      user-select: none;
+      pointer-events: none;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
       align-items: center;
       justify-content: center;
       overflow: auto;
