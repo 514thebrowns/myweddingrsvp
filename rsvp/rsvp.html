@@ -16,31 +16,20 @@
       padding: 0;
       background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
       color: #333;
-      height: 100vh;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .overlay {
-      background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.9));
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .form-container {
-      position: relative;
-      z-index: 2;
-      max-width: 600px;
-      margin: 60px auto;
-      background: white;
+      background: rgba(255, 255, 255, 0.95);
       padding: 40px 30px;
       border-radius: 25px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       text-align: center;
+      width: 100%;
+      max-width: 600px;
     }
 
     h1 {
@@ -71,6 +60,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s ease;
+      border: none;
     }
 
     .rsvp-submit-button:hover {
@@ -78,21 +68,19 @@
     }
 
     @media (max-width: 768px) {
-      .form-container {
-        margin: 30px 15px;
-        padding: 30px 20px;
-      }
-
       h1 {
         font-size: 42px;
+      }
+
+      .form-container {
+        padding: 30px 20px;
+        margin: 20px;
       }
     }
   </style>
 </head>
 <body>
 
-  
-  
   <div class="form-container">
     <h1>RSVP for Fanie & Triston</h1>
     <form id="rsvp-form" action="YOUR_FORM_PROCESSING_URL" method="POST">
@@ -100,10 +88,10 @@
       <input class="input-field" type="tel" id="phone" name="phone" placeholder="Your Phone Number" required />
       <input class="input-field" type="email" id="email" name="email" placeholder="Your Email Address" required />
       <input class="input-field" type="number" id="seats" name="seats" placeholder="Number of Seats" required min="1" />
-      
       <button type="submit" class="rsvp-submit-button">Submit RSVP</button>
     </form>
   </div>
 
 </body>
 </html>
+
