@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wedding Invitation</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css"> <!-- External CSS -->
+  <link rel="stylesheet" href="styles.css">
   <style>
     .snowflake {
       position: fixed;
@@ -37,11 +37,11 @@
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Invitation Container -->
+  <!-- Main Invitation Container -->
   <div class="container">
     <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
 
-    <!-- English Version -->
+    <!-- English Invitation -->
     <div id="english">
       <h1>You’re Invited!</h1>
       <p>We would be honored to have you celebrate our special day with us.</p>
@@ -53,7 +53,7 @@
       <a href="rsvp.html" class="rsvp-button">RSVP Here</a>
     </div>
 
-    <!-- French Version -->
+    <!-- French Invitation -->
     <div id="french" style="display:none;">
       <h1>Vous êtes invités !</h1>
       <p>Ce serait un honneur pour nous de vous avoir à nos côtés pour célébrer ce jour spécial.</p>
@@ -85,6 +85,30 @@
     }
 
     // Music Autoplay Fallback
+    document.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('weddingMusic');
+      const resumeAudio = () => {
+        audio.play();
+        document.removeEventListener('click', resumeAudio);
+      };
+      document.addEventListener('click', resumeAudio);
+    });
+
+    // Snowfall Effect
+    setInterval(() => {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄️";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = 3 + Math.random() * 5 + "s";
+      snowflake.style.fontSize = 10 + Math.random() * 20 + "px";
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 8000);
+    }, 200);
+  </script>
+</body>
+</html>
+
 
 
 
