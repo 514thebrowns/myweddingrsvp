@@ -1,10 +1,124 @@
+/* styles.css */
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
   color: #333;
-  min-height: 100vh; /* allows content to expand the page height */
+  min-height: 100vh;
   position: relative;
-  overflow-x: hidden; /* allows vertical scroll but hides horizontal overflow */
+  overflow-x: hidden;
 }
+
+.container {
+  background: rgba(255, 255, 255, 0.94);
+  max-width: 720px;
+  padding: 50px 30px;
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin: auto;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #d81b60;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 3;
+}
+
+.toggle-btn:hover {
+  background: #ad1457;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 56px;
+  color: #b71c1c;
+  margin-bottom: 20px;
+}
+
+.couple-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 48px;
+  color: #b71c1c;
+  margin: 10px 0 25px;
+}
+
+p {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.rsvp-button {
+  display: inline-block;
+  padding: 14px 30px;
+  font-size: 20px;
+  color: white;
+  background: #d81b60;
+  text-decoration: none;
+  border-radius: 30px;
+  margin-top: 30px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.rsvp-button:hover {
+  background: #ad1457;
+}
+
+.snowflake {
+  position: fixed;
+  top: -10px;
+  z-index: 1;
+  user-select: none;
+  color: white;
+  font-size: 1em;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 30px 15px;
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  .couple-name {
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
