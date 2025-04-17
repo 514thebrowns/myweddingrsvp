@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
+      color: #333;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .container {
+      padding: 80px 20px;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+
+    .invite-box {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px 30px;
+      border-radius: 20px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 60px;
+      margin-bottom: 10px;
+      color: #b71c1c;
+    }
+
+    h2.couple-name {
+      font-size: 36px;
+      margin-top: 10px;
+      color: #b71c1c;
+    }
+
+    .scripted {
+      font-family: 'Great Vibes', cursive;
+      font-size: 50px;
+      color: #b71c1c;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    p, a {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .rsvp-button {
+      display: inline-block;
+      padding: 12px 24px;
+      margin-top: 20px;
+      background-color: #b71c1c;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background-color: #b71c1c;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 5;
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      z-index: 1;
+      user-select: none;
+      color: white;
+      font-size: 1em;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio id="weddingMusic" autoplay loop controls style="position: absolute; bottom: 20px; left: 20px; z-index: 10;">
+    <source src="assets/audio/wedding-song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Language Toggle -->
+  <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="invite-box">
+      <div id="english">
+        <h1>You’re Invited!</h1>
+        <p>We would be honored to have you celebrate our special day with us.</p>
+        <h2 class="scripted">Fanie & Triston</h2>
+        <p><strong>Date:</strong> November 1, 2025</p>
+        <p><strong>Time:</strong> 11:30 AM</p>
+        <p><strong>Location:</strong> 392 Notre Dame, Montebello, Quebec, Canada J0V 1L0</p>
+        <p>We can't wait to celebrate with you!</p>
+        <a href="rsvp.html" class="rsvp-button">RSVP Here</a>
+      </div>
+
+      <div id="french" style="display:none;">
+        <h1>Vous êtes invités !</h1>
+        <p>Ce serait un honneur pour nous de vous avoir à nos côtés pour célébrer ce jour spécial.</p>
+        <h2 class="scripted">Fanie & Triston</h2>
+        <p><strong>Date :</strong> 1er novembre 2025</p>
+        <p><strong>Heure :</strong> 11h30</p>
+        <p><strong>Lieu :</strong> 392 Notre-Dame, Montebello, Québec, Canada J0V 1L0</p>
+        <p>Nous avons hâte de célébrer avec vous !</p>
+        <a href="rsvp.html" class="rsvp-button">RSVP Ici</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Language Toggle
+    function toggleLanguage() {
+      const english = document.getElementById("english");
+      const french = document.getElementById("french");
+      const button = document.querySelector(".toggle-btn");
+
+      if (english.style.display !== "none") {
+        english.style.display = "none";
+        french.style.display = "block";
+        button.textContent = "EN";
+      } else {
+        english.style.display = "block";
+        french.style.display = "none";
+        button.textContent = "FR";
+      }
+    }
+
+    // Autoplay Fix for Some Browsers
+    document.addEventListener('DOMContentLoaded', function () {
+      const audio = document.getElementById('weddingMusic');
+      const startMusic = () => {
+        audio.play();
+        document.removeEventListener('click', startMusic);
+      };
+      document.addEventListener('click', startMusic);
+    });
+
+    // Snowfall Effect
+    setInterval(() => {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄️";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = 3 + Math.random() * 5 + "s";
+      snowflake.style.fontSize = 10 + Math.random() * 20 + "px";
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 8000);
+    }, 200);
+  </script>
+
+</body>
+</html>
+
+
+
+
+
