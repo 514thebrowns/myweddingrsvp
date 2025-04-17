@@ -30,12 +30,12 @@
       }
     }
 
-    #english {
-      display: block;
+    #english, #french {
+      display: none;
     }
 
-    #french {
-      display: none;
+    .active {
+      display: block;
     }
   </style>
 </head>
@@ -51,7 +51,7 @@
     <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
 
     <!-- English Version -->
-    <div id="english">
+    <div id="english" class="active">
       <h1>You’re Invited!</h1>
       <p>We would be honored to have you celebrate our special day with us.</p>
       <h2 class="couple-name">Fanie & Triston</h2>
@@ -82,19 +82,20 @@
       const french = document.getElementById("french");
       const button = document.querySelector(".toggle-btn");
 
-      if (english.style.display !== "none") {
-        english.style.display = "none";
-        french.style.display = "block";
+      if (english.classList.contains("active")) {
+        english.classList.remove("active");
+        french.classList.add("active");
         button.textContent = "EN";
       } else {
-        english.style.display = "block";
-        french.style.display = "none";
+        french.classList.remove("active");
+        english.classList.add("active");
         button.textContent = "FR";
       }
     }
   </script>
 </body>
 </html>
+
 
 
 
