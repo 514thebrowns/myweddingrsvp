@@ -111,7 +111,10 @@
 
   <div class="reservation-book">
     <h1>RSVP for Fanie & Triston</h1>
-    <form id="rsvp-form" onsubmit="submitRSVP(event)">
+    <form
+      action="https://formspree.io/f/mzzrprbl"  <!-- Formspree URL for submission -->
+      method="POST"
+    >
       <input class="input-field" type="text" id="name" name="name" placeholder="Your Name" required />
       <input class="input-field" type="tel" id="phone" name="phone" placeholder="Your Phone Number" required />
       <input class="input-field" type="email" id="email" name="email" placeholder="Your Email Address" required />
@@ -138,31 +141,8 @@
 
     // Call the function to generate snowflakes
     createSnowflakes();
-
-    async function submitRSVP(event) {
-      event.preventDefault();
-
-      const formData = new FormData(event.target);
-      const formObject = {};
-      formData.forEach((value, key) => formObject[key] = value);
-
-      const response = await fetch('/submit-rsvp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formObject),
-      });
-
-      if (response.ok) {
-        document.querySelector('.reservation-book').innerHTML = `
-          <h1>Thank You for Joining Us in Our Day of Celebrating Our Love!</h1>
-        `;
-      } else {
-        alert('There was an issue submitting your RSVP. Please try again.');
-      }
-    }
   </script>
 
 </body>
 </html>
+
