@@ -33,7 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers = str_replace(array("\r", "\n"), '', $headers);
 
     // Send email to you
-    mail($to, $subject, $message, $headers);
+    if (!mail($to, $subject, $message, $headers)) {
+        die("Failed to send email to admin.");
+    }
 
     // Confirmation email to guest
     $confirmation_subject = "Thank You for Your RSVP – A Few Quick Questions";
@@ -58,9 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $guest_headers = str_replace(array("\r", "\n"), '', $guest_headers);
 
     // Send email to the guest
-    mail($email, $confirmation_subject, $confirmation_message, $guest_headers);
+    if (!mail($email, $confirmation_subject, $confirmation_message, $guest_headers)) {
+        die("Failed to send confirmation email to guest.");
+    }
 
     // Redirect or display a thank you message
     echo "Thank you for your RSVP! We look forward to celebrating with you.";
 }
 ?>
+
