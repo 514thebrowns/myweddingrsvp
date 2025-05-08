@@ -106,14 +106,12 @@
 </head>
 <body>
 
-  <!-- Snowflakes falling -->
   <div id="snowflakes"></div>
 
   <div class="reservation-book">
     <h1>RSVP for Fanie & Triston</h1>
 
-    <!-- Ensure the method is POST here -->
-    <form action="https://formspree.io/f/mzzrprbl" method="POST">
+    <form action="/submit-form.php" method="POST">
       <input class="input-field" type="text" id="name" name="name" placeholder="Your Name" required />
       <input class="input-field" type="tel" id="phone" name="phone" placeholder="Your Phone Number" required />
       <input class="input-field" type="email" id="email" name="email" placeholder="Your Email Address" required />
@@ -124,7 +122,6 @@
   </div>
 
   <script>
-    // Function to create falling snowflakes
     function createSnowflakes() {
       setInterval(() => {
         const snowflake = document.createElement("div");
@@ -138,12 +135,8 @@
       }, 200);
     }
 
-    // Call the function to generate snowflakes
     createSnowflakes();
   </script>
 
 </body>
 </html>
-
-
-
