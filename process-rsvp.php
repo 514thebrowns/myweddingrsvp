@@ -5,7 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = htmlspecialchars($_POST['phone']);
     $email = htmlspecialchars($_POST['email']);
     $seats = htmlspecialchars($_POST['seats']);
-    
+
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        die("Invalid email format");
+    }
+
     // Your email address
     $to = "tristoncolombaris@gmail.com";
 
@@ -23,6 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers = "From: no-reply@myweddingrsvp.ca\r\n" .
                "Reply-To: " . $email . "\r\n" .
                "Content-Type: text/plain; charset=UTF-8";
+
+    // Prevent header injection
+    $headers = str_replace(array("\r", "\n"), '', $headers);
 
     // Send email to you
     mail($to, $subject, $message, $headers);
@@ -46,9 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      "Reply-To: tristoncolombaris@gmail.com\r\n" .
                      "Content-Type: text/plain; charset=UTF-8";
 
+    // Prevent header injection
+    $guest_headers = str_replace(array("\r", "\n"), '', $guest_headers);
+
     // Send email to the guest
     mail($email, $confirmation_subject, $confirmation_message, $guest_headers);
 
+    // Redirect or display a thank you message
     echo "Thank you for your RSVP! We look forward to celebrating with you.";
 }
 ?>
