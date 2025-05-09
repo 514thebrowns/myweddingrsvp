@@ -47,8 +47,9 @@
       color: #333;
       width: 100%; /* Ensure full width */
       margin-bottom: 15px;
-      padding: 8px;
+      padding: 10px;
       box-sizing: border-box;
+      border-radius: 8px;
     }
 
     label {
@@ -59,11 +60,12 @@
     }
 
     input, textarea {
-      padding: 12px;
+      padding: 15px;
       font-size: 16px;
       border: 2px solid #ccc;
-      border-radius: 10px;
+      border-radius: 8px;
       transition: border-color 0.3s, box-shadow 0.3s;
+      box-sizing: border-box;
     }
 
     input:focus, textarea:focus {
@@ -164,30 +166,30 @@
   <!-- Content -->
   <div class="container">
     <div class="form-container">
-      <h1>RSVP</h1>
-      <h2>Please let us know if you'll be attending!</h2>
+      <h1 id="rsvp-title">RSVP</h1>
+      <h2 id="rsvp-subtitle">Please let us know if you'll be attending!</h2>
 
       <!-- RSVP Form -->
       <form action="https://formspree.io/YOUR_EMAIL" method="POST">
-        <label for="name">Full Name</label>
+        <label for="name" id="name-label">Full Name</label>
         <input type="text" id="name" name="name" required>
 
-        <label for="email">Email Address</label>
+        <label for="email" id="email-label">Email Address</label>
         <input type="email" id="email" name="email" required>
 
-        <label for="phone">Phone Number</label>
+        <label for="phone" id="phone-label">Phone Number</label>
         <input type="text" id="phone" name="phone">
 
-        <label for="adults">Number of Adults</label>
+        <label for="adults" id="adults-label">Number of Adults</label>
         <input type="number" id="adults" name="adults" required>
 
-        <label for="kids">Number of Kids</label>
+        <label for="kids" id="kids-label">Number of Kids</label>
         <input type="number" id="kids" name="kids">
 
-        <label for="carpool">Do you need carpool/transportation?</label>
+        <label for="carpool" id="carpool-label">Do you need carpool/transportation?</label>
         <textarea id="carpool" name="carpool"></textarea>
 
-        <label for="allergies">Any allergies we should know about?</label>
+        <label for="allergies" id="allergies-label">Any allergies we should know about?</label>
         <textarea id="allergies" name="allergies"></textarea>
 
         <button type="submit" class="submit-btn">Submit</button>
@@ -198,18 +200,32 @@
   <!-- Scripts -->
   <script>
     function toggleLanguage() {
-      const english = document.getElementById("english");
-      const french = document.getElementById("french");
-      const button = document.querySelector(".toggle-btn");
-
-      if (english.style.display !== "none") {
-        english.style.display = "none";
-        french.style.display = "block";
-        button.textContent = "EN";
+      const isFrench = document.body.classList.contains('french');
+      
+      if (isFrench) {
+        document.body.classList.remove('french');
+        document.getElementById("rsvp-title").textContent = "RSVP";
+        document.getElementById("rsvp-subtitle").textContent = "Please let us know if you'll be attending!";
+        document.getElementById("name-label").textContent = "Full Name";
+        document.getElementById("email-label").textContent = "Email Address";
+        document.getElementById("phone-label").textContent = "Phone Number";
+        document.getElementById("adults-label").textContent = "Number of Adults";
+        document.getElementById("kids-label").textContent = "Number of Kids";
+        document.getElementById("carpool-label").textContent = "Do you need carpool/transportation?";
+        document.getElementById("allergies-label").textContent = "Any allergies we should know about?";
+        document.querySelector(".toggle-btn").textContent = "FR";
       } else {
-        english.style.display = "block";
-        french.style.display = "none";
-        button.textContent = "FR";
+        document.body.classList.add('french');
+        document.getElementById("rsvp-title").textContent = "RSVP (FR)";
+        document.getElementById("rsvp-subtitle").textContent = "Merci de nous faire savoir si vous allez assister !";
+        document.getElementById("name-label").textContent = "Nom complet";
+        document.getElementById("email-label").textContent = "Adresse e-mail";
+        document.getElementById("phone-label").textContent = "Numéro de téléphone";
+        document.getElementById("adults-label").textContent = "Nombre d'adultes";
+        document.getElementById("kids-label").textContent = "Nombre d'enfants";
+        document.getElementById("carpool-label").textContent = "Avez-vous besoin de covoiturage/transport ?";
+        document.getElementById("allergies-label").textContent = "Des allergies dont nous devrions être informés ?";
+        document.querySelector(".toggle-btn").textContent = "EN";
       }
     }
 
