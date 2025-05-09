@@ -106,6 +106,17 @@
         opacity: 0;
       }
     }
+
+    /* Thank You Message */
+    #thankYouMessage {
+      display: none;
+      text-align: center;
+      font-size: 2rem;
+      color: #b71c1c;
+      font-weight: bold;
+      padding: 20px;
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
@@ -130,7 +141,26 @@
         <p><strong>Time:</strong> 11:30 AM</p>
         <p><strong>Location:</strong> 392 Notre Dame, Montebello, Quebec, Canada J0V 1L0</p>
         <p>We can't wait to celebrate with you!</p>
-        <a href="rsvp.html" class="rsvp-button">RSVP Here</a> <!-- Updated link -->
+
+        <!-- RSVP Form -->
+        <form id="rsvpForm" action="process-rsvp.php" method="POST">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="seats">Seats Needed:</label>
+            <input type="number" id="seats" name="seats" required min="1" />
+          </div>
+          <button type="submit" class="rsvp-button">Submit RSVP</button>
+        </form>
+        
+        <!-- Thank You Message -->
+        <div id="thankYouMessage">Thank you for your RSVP! We can’t wait to celebrate with you.</div>
       </div>
 
       <div id="french" style="display:none;">
@@ -147,6 +177,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
   <script>
     // Language Toggle
     function toggleLanguage() {
@@ -186,6 +217,27 @@
       document.body.appendChild(snowflake);
       setTimeout(() => snowflake.remove(), 8000);
     }, 200);
+
+    // Confetti Effect
+    function showConfetti() {
+      const confetti = canvasConfetti.create(document.body, {
+        resize: true,
+        useWorker: true
+      });
+      confetti({ particleCount: 300, spread: 70, origin: { y: 0.6 } });
+    }
+
+    // Handle Form Submission
+    const form = document.getElementById('rsvpForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Simulate successful form submission and display confetti & thank you message
+      setTimeout(function() {
+        showConfetti();
+        document.getElementById('thankYouMessage').style.display = "block";
+      }, 500);  // Small delay before showing confetti
+    });
   </script>
 
 </body>
