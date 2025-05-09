@@ -1,95 +1,92 @@
 <?php
-// Include Composer's autoloader and Dotenv
-require 'vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Check if form is submitted using POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize and get form data
+    // Process the form data (Formspree submission)
     $name = htmlspecialchars($_POST['name']);
-    $phone = htmlspecialchars($_POST['phone']);
     $email = htmlspecialchars($_POST['email']);
-    $seats = htmlspecialchars($_POST['seats']);
+    $message = htmlspecialchars($_POST['message']);
 
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        die("Invalid email format");
+    // Assuming Formspree handling is successful (simple confirmation)
+    // You can configure Formspree as needed
+    $formspreeUrl = 'https://formspree.io/f/your-form-id'; // Replace with your Formspree form URL
+
+    $response = file_get_contents($formspreeUrl, false, stream_context_create([
+        'http' => [
+            'method' => 'POST',
+            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+            'content' => http_build_query([
+                'name' => $name,
+                'email' => $email,
+                'message' => $message,
+            ]),
+        ],
+    ]));
+
+    // If the response from Formspree is successful, show a success page with confetti
+    if ($response) {
+        echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Thank You!</title>
+          <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              background-color: #f4f4f4;
+              text-align: center;
+              padding-top: 50px;
+            }
+            h1 {
+              font-size: 3rem;
+              color: #b71c1c;
+            }
+            p {
+              font-size: 1.25rem;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Thank You for Your RSVP!</h1>
+          <p>We can’t wait to celebrate with you!</p>
+
+          <script>
+            // Confetti effect
+            var end = Date.now() + (5 * 1000);
+            var colors = ['#ff0', '#0f0', '#00f', '#f0f', '#ff0000'];
+
+            (function frame() {
+              confetti({
+                particleCount: 2,
+                angle: Math.random() * 360,
+                spread: 360,
+                origin: { x: Math.random(), y: Math.random() - 0.2 },
+                colors: colors
+              });
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            })();
+          </script>
+        </body>
+        </html>';
+        exit();
+    } else {
+        // Show error if Formspree submission fails
+        echo "Sorry, there was an issue with your submission. Please try again.";
     }
-
-    // Validate the number of seats (must be a positive integer)
-    if (!is_numeric($seats) || $seats < 1) {
-        die("Invalid number of seats.");
-    }
-
-    // Admin email address
-    $to = "tristoncolombaris@gmail.com";
-
-    // Subject for admin email
-    $subject = "RSVP for Fanie & Triston's Wedding";
-    
-    // Admin message body
-    $message = "You have received a new RSVP submission!\n\n";
-    $message .= "Name: " . $name . "\n";
-    $message .= "Phone: " . $phone . "\n";
-    $message .= "Email: " . $email . "\n";
-    $message .= "Seats Needed: " . $seats . "\n";
-    
-    // PHPMailer setup for admin email
-    $mail = new PHPMailer\PHPMailer\PHPMailer();
-    $mail->isSMTP();                                           // Set mailer to use SMTP
-    $mail->Host       = getenv('SMTP_HOST');                     // Get SMTP host from .env
-    $mail->SMTPAuth   = true;                                    // Enable SMTP authentication
-    $mail->Username   = getenv('SMTP_USERNAME');                 // Get SMTP username from .env
-    $mail->Password   = getenv('SMTP_PASSWORD');                 // Get SMTP password from .env
-    $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption
-    $mail->Port       = getenv('SMTP_PORT');                     // Get SMTP port from .env
-
-    // Admin email
-    $mail->setFrom('no-reply@myweddingrsvp.ca', 'Wedding RSVP');
-    $mail->addAddress($to);                                      // Add the admin's email address
-
-    // Email content for admin
-    $mail->Subject = $subject;
-    $mail->Body    = $message;
-
-    // Send the email to admin
-    if (!$mail->send()) {
-        die("Failed to send email to admin: " . $mail->ErrorInfo);
-    }
-
-    // Confirmation email to guest
-    $confirmation_subject = "Thank You for Your RSVP – A Few Quick Questions";
-    $confirmation_message = "Hi {$name},\n\n";
-    $confirmation_message .= "Thank you for submitting your request to join us at our wedding. We can’t wait to celebrate with you!\n\n";
-    $confirmation_message .= "Before we confirm your seat, we just need a little more information:\n\n";
-    $confirmation_message .= "- Will you be bringing any children?\n";
-    $confirmation_message .= "- Do you or anyone in your party have allergies we should be aware of?\n";
-    $confirmation_message .= "- Will you need help with carpooling or transportation?\n";
-    $confirmation_message .= "- Would you like information on nearby hotels or accommodations?\n\n";
-    $confirmation_message .= "Please reply at your earliest convenience.\n\n";
-    $confirmation_message .= "With love,\n";
-    $confirmation_message .= "The Browns.";
-
-    // Set up guest confirmation email
-    $mail->clearAddresses();
-    $mail->addAddress($email);                                     // Guest email address
-    $mail->Subject = $confirmation_subject;
-    $mail->Body    = $confirmation_message;
-
-    // Send confirmation email to guest
-    if (!$mail->send()) {
-        die("Failed to send confirmation email to guest: " . $mail->ErrorInfo);
-    }
-
-    // Display thank you message after successful submission
-    echo "Thank you for your RSVP! We look forward to celebrating with you.";
-
-    // Stop script execution after displaying the message
-    exit();
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding RSVP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>RSVP to Our Wedding</h1>
+    <form action="" method="
