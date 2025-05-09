@@ -18,7 +18,7 @@
     }
 
     .container {
-      padding: 80px 20px;
+      padding: 60px 15px;
       text-align: center;
       z-index: 2;
       position: relative;
@@ -36,7 +36,7 @@
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 50px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       color: #b71c1c;
     }
 
@@ -83,15 +83,20 @@
 
     @media (max-width: 600px) {
       .rsvp-box {
-        padding: 20px 15px;
+        padding: 25px 20px;
       }
 
       h1 {
         font-size: 36px;
       }
 
+      label {
+        font-size: 16px;
+      }
+
       input, textarea, select {
         font-size: 15px;
+        padding: 10px;
       }
 
       button[type="submit"] {
@@ -122,14 +127,23 @@
           <label for="email">Email</label>
           <input type="email" name="email" id="email" required>
 
-          <label for="attending">Will you attend?</label>
-          <select name="attending" id="attending" required>
-            <option value="Yes">Yes</option>
+          <label for="phone">Phone Number</label>
+          <input type="tel" name="phone" id="phone">
+
+          <label for="kids">How many kids will attend?</label>
+          <input type="number" name="kids" id="kids" min="0" required>
+
+          <label for="adults">How many adults will attend?</label>
+          <input type="number" name="adults" id="adults" min="0" required>
+
+          <label for="transport">Do you need carpool/transportation?</label>
+          <select name="transport" id="transport" required>
             <option value="No">No</option>
+            <option value="Yes">Yes</option>
           </select>
 
-          <label for="message">Message (optional)</label>
-          <textarea name="message" id="message" rows="4"></textarea>
+          <label for="allergies">Any allergies or special needs?</label>
+          <textarea name="allergies" id="allergies" rows="3"></textarea>
 
           <button type="submit">Submit</button>
         </form>
@@ -144,14 +158,23 @@
           <label for="email_fr">Email</label>
           <input type="email" name="email" id="email_fr" required>
 
-          <label for="attending_fr">Serez-vous présent ?</label>
-          <select name="attending" id="attending_fr" required>
-            <option value="Yes">Oui</option>
-            <option value="No">Non</option>
+          <label for="phone_fr">Numéro de téléphone</label>
+          <input type="tel" name="phone" id="phone_fr">
+
+          <label for="kids_fr">Combien d'enfants seront présents ?</label>
+          <input type="number" name="kids" id="kids_fr" min="0" required>
+
+          <label for="adults_fr">Combien d'adultes seront présents ?</label>
+          <input type="number" name="adults" id="adults_fr" min="0" required>
+
+          <label for="transport_fr">Avez-vous besoin de transport ?</label>
+          <select name="transport" id="transport_fr" required>
+            <option value="Non">Non</option>
+            <option value="Oui">Oui</option>
           </select>
 
-          <label for="message_fr">Message (optionnel)</label>
-          <textarea name="message" id="message_fr" rows="4"></textarea>
+          <label for="allergies_fr">Allergies ou besoins particuliers ?</label>
+          <textarea name="allergies" id="allergies_fr" rows="3"></textarea>
 
           <button type="submit">Envoyer</button>
         </form>
@@ -179,5 +202,6 @@
 
 </body>
 </html>
+
 
 
