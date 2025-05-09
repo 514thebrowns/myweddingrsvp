@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RSVP</title>
+  <title>Wedding RSVP</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -13,58 +13,56 @@
       background: url('https://i.redd.it/greaaqf0o0t11.jpg') no-repeat center center/cover;
       color: #333;
       min-height: 100vh;
-      overflow-x: hidden;
       position: relative;
+      overflow-x: hidden;
     }
 
     .container {
-      padding: 60px 15px;
+      padding: 80px 20px;
       text-align: center;
       z-index: 2;
       position: relative;
     }
 
-    .rsvp-box {
-      background-color: rgba(255, 255, 255, 0.9);
+    .invite-box {
+      background-color: rgba(255, 255, 255, 0.85);
       padding: 40px 30px;
       border-radius: 20px;
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 50px;
-      margin-bottom: 20px;
+      font-size: 60px;
+      margin-bottom: 10px;
       color: #b71c1c;
     }
 
-    label {
-      display: block;
-      text-align: left;
-      margin-top: 15px;
-      font-weight: 500;
+    h2.couple-name,
+    .scripted {
+      font-size: 36px;
+      color: #b71c1c;
+      margin: 20px 0;
+      font-family: 'Great Vibes', cursive;
     }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 5px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
+    p, a {
+      font-size: 18px;
+      color: #333;
     }
 
-    button[type="submit"] {
+    .rsvp-button {
+      display: inline-block;
+      padding: 12px 24px;
       margin-top: 20px;
       background-color: #b71c1c;
-      color: white;
+      color: #fff;
       border: none;
-      padding: 12px 24px;
       border-radius: 25px;
+      text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
     }
 
     .toggle-btn {
@@ -81,127 +79,137 @@
       z-index: 5;
     }
 
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      z-index: 1;
+      user-select: none;
+      color: white;
+      font-size: 1em;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Mobile adjustments */
     @media (max-width: 600px) {
-      .rsvp-box {
-        padding: 25px 20px;
+      .invite-box {
+        width: 90%;
+        padding: 20px;
+        margin: 0 auto;
+        box-shadow: none; /* Optional: remove shadow for mobile */
       }
 
       h1 {
-        font-size: 36px;
+        font-size: 40px;
       }
 
-      label {
+      h2.couple-name,
+      .scripted {
+        font-size: 28px;
+      }
+
+      p, a {
         font-size: 16px;
       }
 
-      input, textarea, select {
-        font-size: 15px;
-        padding: 10px;
-      }
-
-      button[type="submit"] {
-        font-size: 16px;
+      .rsvp-button {
         padding: 10px 20px;
+        font-size: 16px;
       }
 
       .toggle-btn {
         padding: 6px 12px;
         font-size: 14px;
       }
+
+      audio {
+        bottom: 10px;
+        left: 10px;
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Background Music -->
+  <audio id="weddingMusic" autoplay loop controls>
+    <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <!-- Language Toggle -->
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
 
+  <!-- Content -->
   <div class="container">
-    <div class="rsvp-box">
-      <div id="english">
-        <h1>RSVP</h1>
-        <form action="https://formspree.io/f/your-form-id" method="POST">
-          <label for="name">Name</label>
-          <input type="text" name="name" id="name" required>
-
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" required>
-
-          <label for="phone">Phone Number</label>
-          <input type="tel" name="phone" id="phone">
-
-          <label for="kids">How many kids will attend?</label>
-          <input type="number" name="kids" id="kids" min="0" required>
-
-          <label for="adults">How many adults will attend?</label>
-          <input type="number" name="adults" id="adults" min="0" required>
-
-          <label for="transport">Do you need carpool/transportation?</label>
-          <select name="transport" id="transport" required>
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
-          </select>
-
-          <label for="allergies">Any allergies or special needs?</label>
-          <textarea name="allergies" id="allergies" rows="3"></textarea>
-
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-
-      <div id="french" style="display: none;">
-        <h1>RSVP</h1>
-        <form action="https://formspree.io/f/your-form-id" method="POST">
-          <label for="name_fr">Nom</label>
-          <input type="text" name="name" id="name_fr" required>
-
-          <label for="email_fr">Email</label>
-          <input type="email" name="email" id="email_fr" required>
-
-          <label for="phone_fr">Numéro de téléphone</label>
-          <input type="tel" name="phone" id="phone_fr">
-
-          <label for="kids_fr">Combien d'enfants seront présents ?</label>
-          <input type="number" name="kids" id="kids_fr" min="0" required>
-
-          <label for="adults_fr">Combien d'adultes seront présents ?</label>
-          <input type="number" name="adults" id="adults_fr" min="0" required>
-
-          <label for="transport_fr">Avez-vous besoin de transport ?</label>
-          <select name="transport" id="transport_fr" required>
-            <option value="Non">Non</option>
-            <option value="Oui">Oui</option>
-          </select>
-
-          <label for="allergies_fr">Allergies ou besoins particuliers ?</label>
-          <textarea name="allergies" id="allergies_fr" rows="3"></textarea>
-
-          <button type="submit">Envoyer</button>
-        </form>
-      </div>
+    <div class="invite-box">
+      <h1>You’re Invited!</h1>
+      <p>We would be honored to have you celebrate our special day with us.</p>
+      <h2 class="scripted">Fanie & Triston</h2>
+      <p><strong>Date:</strong> November 1, 2025</p>
+      <p><strong>Time:</strong> 11:30 AM</p>
+      <p><strong>Location:</strong> 392 Notre Dame, Montebello, Quebec, Canada J0V 1L0</p>
+      <p>We can't wait to celebrate with you!</p>
+      <a href="rsvp.html" class="rsvp-button">RSVP Here</a>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script>
     function toggleLanguage() {
-      const en = document.getElementById("english");
-      const fr = document.getElementById("french");
-      const btn = document.querySelector(".toggle-btn");
+      const english = document.getElementById("english");
+      const french = document.getElementById("french");
+      const button = document.querySelector(".toggle-btn");
 
-      if (en.style.display !== "none") {
-        en.style.display = "none";
-        fr.style.display = "block";
-        btn.textContent = "EN";
+      if (english.style.display !== "none") {
+        english.style.display = "none";
+        french.style.display = "block";
+        button.textContent = "EN";
       } else {
-        en.style.display = "block";
-        fr.style.display = "none";
-        btn.textContent = "FR";
+        english.style.display = "block";
+        french.style.display = "none";
+        button.textContent = "FR";
       }
     }
+
+    // Autoplay Fix for Mobile
+    document.addEventListener('DOMContentLoaded', function () {
+      const audio = document.getElementById('weddingMusic');
+      const startMusic = () => {
+        audio.play();
+        document.removeEventListener('click', startMusic);
+      };
+      document.addEventListener('click', startMusic);
+    });
+
+    // Snowfall Effect
+    setInterval(() => {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄️";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = 3 + Math.random() * 5 + "s";
+      snowflake.style.fontSize = 10 + Math.random() * 20 + "px";
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 8000);
+    }, 200);
   </script>
 
 </body>
 </html>
+
 
 
 
