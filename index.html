@@ -40,18 +40,12 @@
       color: #b71c1c;
     }
 
-    h2.couple-name {
-      font-size: 36px;
-      margin-top: 10px;
-      color: #b71c1c;
-    }
-
+    h2.couple-name,
     .scripted {
-      font-family: 'Great Vibes', cursive;
-      font-size: 50px;
+      font-size: 36px;
       color: #b71c1c;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      margin: 20px 0;
+      font-family: 'Great Vibes', cursive;
     }
 
     p, a {
@@ -107,22 +101,53 @@
       }
     }
 
-    /* Thank You Message */
-    #thankYouMessage {
-      display: none;
-      text-align: center;
-      font-size: 2rem;
-      color: #b71c1c;
-      font-weight: bold;
-      padding: 20px;
-      margin-top: 30px;
+    audio {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      z-index: 10;
+    }
+
+    @media (max-width: 600px) {
+      .invite-box {
+        padding: 20px 15px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      h2.couple-name,
+      .scripted {
+        font-size: 28px;
+      }
+
+      p, a {
+        font-size: 16px;
+      }
+
+      .rsvp-button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+      .toggle-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+
+      audio {
+        bottom: 10px;
+        left: 10px;
+        width: 90%;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Background Music -->
-  <audio id="weddingMusic" autoplay loop controls style="position: absolute; bottom: 20px; left: 20px; z-index: 10;">
+  <audio id="weddingMusic" autoplay loop controls>
     <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
@@ -141,26 +166,7 @@
         <p><strong>Time:</strong> 11:30 AM</p>
         <p><strong>Location:</strong> 392 Notre Dame, Montebello, Quebec, Canada J0V 1L0</p>
         <p>We can't wait to celebrate with you!</p>
-
-        <!-- RSVP Form -->
-        <form id="rsvpForm" action="process-rsvp.php" method="POST">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div class="form-group">
-            <label for="seats">Seats Needed:</label>
-            <input type="number" id="seats" name="seats" required min="1" />
-          </div>
-          <button type="submit" class="rsvp-button">Submit RSVP</button>
-        </form>
-        
-        <!-- Thank You Message -->
-        <div id="thankYouMessage">Thank you for your RSVP! We can’t wait to celebrate with you.</div>
+        <a href="rsvp.html" class="rsvp-button">RSVP Here</a>
       </div>
 
       <div id="french" style="display:none;">
@@ -171,15 +177,13 @@
         <p><strong>Heure :</strong> 11h30</p>
         <p><strong>Lieu :</strong> 392 Notre-Dame, Montebello, Québec, Canada J0V 1L0</p>
         <p>Nous avons hâte de célébrer avec vous !</p>
-        <a href="rsvp.html" class="rsvp-button">RSVP Ici</a> <!-- Updated link -->
+        <a href="rsvp.html" class="rsvp-button">RSVP Ici</a>
       </div>
     </div>
   </div>
 
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
   <script>
-    // Language Toggle
     function toggleLanguage() {
       const english = document.getElementById("english");
       const french = document.getElementById("french");
@@ -196,7 +200,7 @@
       }
     }
 
-    // Autoplay Fix for Some Browsers
+    // Autoplay Fix for Mobile
     document.addEventListener('DOMContentLoaded', function () {
       const audio = document.getElementById('weddingMusic');
       const startMusic = () => {
@@ -217,27 +221,6 @@
       document.body.appendChild(snowflake);
       setTimeout(() => snowflake.remove(), 8000);
     }, 200);
-
-    // Confetti Effect
-    function showConfetti() {
-      const confetti = canvasConfetti.create(document.body, {
-        resize: true,
-        useWorker: true
-      });
-      confetti({ particleCount: 300, spread: 70, origin: { y: 0.6 } });
-    }
-
-    // Handle Form Submission
-    const form = document.getElementById('rsvpForm');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      // Simulate successful form submission and display confetti & thank you message
-      setTimeout(function() {
-        showConfetti();
-        document.getElementById('thankYouMessage').style.display = "block";
-      }, 500);  // Small delay before showing confetti
-    });
   </script>
 
 </body>
