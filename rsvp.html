@@ -214,18 +214,22 @@
     }
 
     // Snowfall Effect
-    setInterval(() => {
-      const snowflake = document.createElement("div");
-      snowflake.classList.add("snowflake");
-      snowflake.textContent = "❄️"; // Snowflake symbol
-      snowflake.style.left = Math.random() * 100 + "vw"; // Random horizontal position
-      snowflake.style.fontSize = 10 + Math.random() * 20 + "px"; // Random size
-      snowflake.style.animationDuration = 3 + Math.random() * 5 + "s"; // Random fall duration
-      snowflake.style.animationDelay = Math.random() * 5 + "s"; // Random delay before falling
-      document.body.appendChild(snowflake);
+    function generateSnowflakes() {
+      setInterval(() => {
+        const snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.textContent = "❄️"; // Snowflake symbol
+        snowflake.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+        snowflake.style.fontSize = 10 + Math.random() * 25 + "px"; // Random size
+        snowflake.style.animationDuration = 5 + Math.random() * 8 + "s"; // Smooth and slower fall
+        snowflake.style.animationDelay = Math.random() * 5 + "s"; // Random delay before falling
+        document.body.appendChild(snowflake);
 
-      setTimeout(() => snowflake.remove(), 8000);
-    }, 200); // Every 200ms create a new snowflake
+        setTimeout(() => snowflake.remove(), 10000); // Remove snowflakes after they fall
+      }, 300); // New snowflake every 300ms
+    }
+
+    generateSnowflakes(); // Start generating snowflakes
   </script>
 
 </body>
