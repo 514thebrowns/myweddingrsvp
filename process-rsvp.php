@@ -16,6 +16,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Invalid email format");
     }
 
+    // Validate the number of seats (must be a positive integer)
+    if (!is_numeric($seats) || $seats < 1) {
+        die("Invalid number of seats.");
+    }
+
     // Admin email address
     $to = "tristoncolombaris@gmail.com";
 
@@ -66,5 +71,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Display thank you message after successful submission
     echo "Thank you for your RSVP! We look forward to celebrating with you.";
+
+    // Stop script execution after displaying the message
+    exit();
 }
 ?>
