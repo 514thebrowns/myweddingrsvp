@@ -118,23 +118,24 @@
     }
 
     .snowflake {
-      position: fixed;
+      position: absolute;
       top: -10px;
-      z-index: 1;
-      user-select: none;
       color: white;
       font-size: 1em;
-      animation: fall linear infinite;
+      user-select: none;
       pointer-events: none;
+      animation: fall linear forwards;
+      will-change: transform;
+      z-index: 1;
     }
 
     @keyframes fall {
       0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(0);
         opacity: 1;
       }
       100% {
-        transform: translateY(100vh) rotate(360deg);
+        transform: translateY(100vh);
         opacity: 0;
       }
     }
@@ -208,11 +209,10 @@
     </div>
   </div>
 
-  <!-- Scripts -->
   <script>
     function toggleLanguage() {
       const isFrench = document.body.classList.contains('french');
-      
+
       if (isFrench) {
         document.body.classList.remove('french');
         document.getElementById("rsvp-title").textContent = "RSVP";
@@ -245,22 +245,40 @@
       audio.play().catch(err => console.log("Playback failed:", err));
     }
 
-    // Snowfall Effect
+    // Optimized Snowfall
     function generateSnowflakes() {
-      setInterval(() => {
+      const maxSnowflakes = 50;
+      let currentCount = 0;
+
+      const interval = setInterval(() => {
+        if (currentCount >= maxSnowflakes) return;
+
         const snowflake = document.createElement("div");
         snowflake.classList.add("snowflake");
         snowflake.textContent = "❄️";
         snowflake.style.left = Math.random() * 100 + "vw";
         snowflake.style.fontSize = 10 + Math.random() * 25 + "px";
-        snowflake.style.animationDuration = 5 + Math.random() * 8 + "s";
-        snowflake.style.animationDelay = Math.random() * 5 + "s";
+        snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
+        snowflake.style.animationDelay = Math.random() * 2 + "s";
+
         document.body.appendChild(snowflake);
-        setTimeout(() => snowflake.remove(), 10000);
-      }, 300);
+        currentCount++;
+
+        setTimeout(() => {
+          snowflake.remove();
+          currentCount--;
+        }, 10000);
+      }, 500);
     }
 
-    generateSnowflakes();
+    // Snow only on non-mobile or light version on mobile
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    if (!isMobile) {
+      generateSnowflakes();
+    } else {
+      setTimeout(() => generateSnowflakes(), 2000);
+    }
   </script>
 </body>
 </html>
+
