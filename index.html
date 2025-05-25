@@ -200,29 +200,6 @@
       }
     }
 
-    // Autoplay + Fade-In Effect
-    document.addEventListener('DOMContentLoaded', function () {
-      const audio = document.getElementById('weddingMusic');
-      audio.volume = 0;
-
-      const startMusic = () => {
-        audio.play().then(() => {
-          let vol = 0;
-          const fadeInterval = setInterval(() => {
-            if (vol < 1.0) {
-              vol += 0.05;
-              audio.volume = Math.min(vol, 1.0);
-            } else {
-              clearInterval(fadeInterval);
-            }
-          }, 200); // fade over ~4 seconds
-        }).catch(() => {});
-        document.removeEventListener('click', startMusic);
-      };
-
-      document.addEventListener('click', startMusic);
-    });
-
     // Snowfall Effect
     setInterval(() => {
       const snowflake = document.createElement("div");
