@@ -101,34 +101,6 @@
       }
     }
 
-    audio {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
-      z-index: 10;
-      display: none; /* Hide default audio controls */
-    }
-
-    /* Play music button styling */
-    #playMusicBtn {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 20;
-      padding: 12px 25px;
-      font-size: 18px;
-      background-color: #b71c1c;
-      color: white;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      transition: background-color 0.3s ease;
-    }
-    #playMusicBtn:hover {
-      background-color: #8b1010;
-    }
-
     @media (max-width: 600px) {
       .invite-box {
         padding: 20px 15px;
@@ -156,32 +128,10 @@
         padding: 6px 12px;
         font-size: 14px;
       }
-
-      audio {
-        bottom: 10px;
-        left: 10px;
-        width: 90%;
-      }
-
-      #playMusicBtn {
-        font-size: 16px;
-        padding: 10px 20px;
-        bottom: 10px;
-        left: 10px;
-      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Background Music -->
-  <audio id="weddingMusic" loop>
-    <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <!-- Play music button -->
-  <button id="playMusicBtn">Play Music</button>
 
   <!-- Language Toggle -->
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
@@ -243,19 +193,6 @@
       document.body.appendChild(snowflake);
       setTimeout(() => snowflake.remove(), 8000);
     }, 200);
-
-    // Play music on button click
-    const audio = document.getElementById('weddingMusic');
-    const playBtn = document.getElementById('playMusicBtn');
-
-    playBtn.addEventListener('click', () => {
-      audio.play().then(() => {
-        playBtn.style.display = 'none'; // Hide the button after playing
-      }).catch(err => {
-        // Playback failed, maybe show a message or log error
-        console.log('Playback error:', err);
-      });
-    });
   </script>
 
 </body>
