@@ -129,12 +129,39 @@
         font-size: 14px;
       }
     }
+
+    /* Play Music Button */
+    #play-music {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #b71c1c;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
 
   <!-- Language Toggle -->
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
+
+  <!-- Play Music Button -->
+  <button id="play-music" onclick="document.getElementById('bg-music').play(); this.style.display='none';">
+    Play Music
+  </button>
+
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="2bae3f0f-3dc7-4aa1-8fe7-880680b6db4b.mp4" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
 
   <!-- Content -->
   <div class="container">
@@ -144,7 +171,7 @@
         <p>We would be honored to have you celebrate our special day with us.</p>
         <h2 class="scripted">Fanie & Triston</h2>
         <p><strong>Date:</strong> November 1, 2025</p>
-        <p><strong>Time:</strong> 11:30 AM</p>
+        <p><strong>Time:</strong> 1:00 PM</p>
         <p><strong>Location:</strong> Château Montebello — 392 Notre Dame, Montebello, Quebec, Canada J0V 1L0</p>
         <p>We can't wait to celebrate with you!</p>
         <a href="rsvp.html" class="rsvp-button">RSVP Here</a>
@@ -155,7 +182,7 @@
         <p>C’est un honneur pour nous de vous avoir à nos côtés pour célébrer ce jour spécial.</p>
         <h2 class="scripted">Fanie & Triston</h2>
         <p><strong>Date :</strong> 1er novembre 2025</p>
-        <p><strong>Heure :</strong> 11h30</p>
+        <p><strong>Heure :</strong> 13h00</p>
         <p><strong>Lieu :</strong> Château Montebello — 392 Notre-Dame, Montebello, Québec, Canada J0V 1L0</p>
         <p>Nous avons hâte de célébrer avec vous !</p>
         <a href="rsvp.html" class="rsvp-button">RSVP Ici</a>
