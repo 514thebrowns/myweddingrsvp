@@ -153,13 +153,13 @@
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
 
   <!-- Play Music Button -->
-  <button id="play-music" onclick="document.getElementById('bg-music').play(); this.style.display='none';">
+  <button id="play-music" onclick="playMusic()">
     Play Music
   </button>
 
   <!-- Background Music -->
   <audio id="bg-music" loop>
-    <source src="2bae3f0f-3dc7-4aa1-8fe7-880680b6db4b.mp3" type="audio/mp3">
+    <source src="i-cant-wait.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
 
@@ -220,7 +220,16 @@
       document.body.appendChild(snowflake);
       setTimeout(() => snowflake.remove(), 8000);
     }, 200);
+
+    // Music Play Function
+    function playMusic() {
+      const audio = document.getElementById('bg-music');
+      const button = document.getElementById('play-music');
+      audio.play();
+      button.style.display = 'none';
+    }
   </script>
 
 </body>
 </html>
+
