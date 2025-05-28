@@ -79,19 +79,26 @@
       z-index: 5;
     }
 
-    #play-music {
+    .snowflake {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #b71c1c;
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      padding: 12px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 100;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      top: -10px;
+      z-index: 1;
+      user-select: none;
+      color: white;
+      font-size: 1em;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     @media (max-width: 600px) {
@@ -127,6 +134,22 @@
         font-size: 14px;
       }
     }
+
+    /* Play Music Button */
+    #play-music {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #b71c1c;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
   </style>
 </head>
 <body>
@@ -137,8 +160,8 @@
   <!-- Play Music Button -->
   <button id="play-music" onclick="playMusic()">Play Music</button>
 
-  <!-- Hidden audio player -->
-  <audio id="bg-music">
+  <!-- Background Music -->
+  <audio id="weddingSong">
     <source src="i-cant-wait.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
@@ -170,8 +193,9 @@
     </div>
   </div>
 
-  <!-- Script -->
+  <!-- Scripts -->
   <script>
+    // Language toggle function
     function toggleLanguage() {
       const english = document.getElementById("english");
       const french = document.getElementById("french");
@@ -188,15 +212,29 @@
       }
     }
 
+    // Snowfall Effect
+    setInterval(() => {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄️";
+      snowflake.style.left = Math.random() * 100 + "vw";
+      snowflake.style.animationDuration = 3 + Math.random() * 5 + "s";
+      snowflake.style.fontSize = 10 + Math.random() * 20 + "px";
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 8000);
+    }, 200);
+
+    // Music Play Function
     function playMusic() {
-      const audio = document.getElementById("bg-music");
+      const audio = document.getElementById('weddingSong');
       audio.play().then(() => {
-        document.getElementById("play-music").style.display = "none";
-      }).catch((e) => {
-        alert("Click interaction required to play music. Please try again.");
-        console.error(e);
+        document.getElementById('play-music').style.display = 'none';
+      }).catch((err) => {
+        alert('Unable to play music automatically. Please interact with the page first.');
+        console.error(err);
       });
     }
   </script>
+
 </body>
 </html>
