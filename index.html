@@ -6,7 +6,6 @@
   <title>Wedding Invitation</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    /* [Same styles as before — unchanged] */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
@@ -129,26 +128,6 @@
         padding: 6px 12px;
         font-size: 14px;
       }
-
-      #play-music {
-        padding: 10px 16px;
-        font-size: 14px;
-      }
-    }
-
-    #play-music {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #b71c1c;
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      padding: 12px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 100;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
   </style>
 </head>
@@ -156,15 +135,6 @@
 
   <!-- Language Toggle -->
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
-
-  <!-- Play Music Button -->
-  <button id="play-music" onclick="playMusic()">Play Music</button>
-
-  <!-- Background Music (FIXED) -->
-  <audio id="weddingSong" preload="auto">
-    <source src="/i-cant-wait.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
 
   <!-- Content -->
   <div class="container">
@@ -195,6 +165,7 @@
 
   <!-- Scripts -->
   <script>
+    // Language toggle function
     function toggleLanguage() {
       const english = document.getElementById("english");
       const french = document.getElementById("french");
@@ -222,20 +193,7 @@
       document.body.appendChild(snowflake);
       setTimeout(() => snowflake.remove(), 8000);
     }, 200);
-
-    // Play Music (Fixed)
-    function playMusic() {
-      const audio = document.getElementById('weddingSong');
-      audio.volume = 1.0;
-      audio.play().then(() => {
-        document.getElementById('play-music').style.display = 'none';
-      }).catch((err) => {
-        alert('Music couldn’t play. Please tap the page again to allow it.');
-        console.warn('Audio playback failed:', err);
-      });
-    }
   </script>
 
 </body>
 </html>
-
