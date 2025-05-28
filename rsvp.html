@@ -103,23 +103,9 @@
       z-index: 5;
     }
 
-    .music-btn {
-      position: absolute;
-      top: 70px;
-      right: 20px;
-      padding: 8px 16px;
-      background-color: #b71c1c;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 5;
-    }
-
     .snowflake {
-      position: absolute;
-      top: -10px;
+      position: fixed;
+      top: -50px;
       color: white;
       font-size: 1em;
       user-select: none;
@@ -135,8 +121,8 @@
         opacity: 1;
       }
       100% {
-        transform: translateY(100vh);
-        opacity: 0;
+        transform: translateY(110vh);
+        opacity: 0.2;
       }
     }
 
@@ -158,7 +144,7 @@
         padding: 10px 20px;
       }
 
-      .toggle-btn, .music-btn {
+      .toggle-btn {
         padding: 6px 12px;
         font-size: 14px;
       }
@@ -167,15 +153,8 @@
 </head>
 <body>
 
-  <!-- Background Music -->
-  <audio id="weddingMusic" loop>
-    <source src="assets/audio/wedding-music.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-
-  <!-- Language & Music Toggle Buttons -->
+  <!-- Language Toggle Button -->
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
-  <button class="music-btn" onclick="playMusic()">▶️ Music</button>
 
   <div class="container">
     <div class="form-container">
@@ -240,12 +219,6 @@
       }
     }
 
-    function playMusic() {
-      const audio = document.getElementById("weddingMusic");
-      audio.play().catch(err => console.log("Playback failed:", err));
-    }
-
-    // Optimized Snowfall
     function generateSnowflakes() {
       const maxSnowflakes = 50;
       let currentCount = 0;
@@ -256,10 +229,17 @@
         const snowflake = document.createElement("div");
         snowflake.classList.add("snowflake");
         snowflake.textContent = "❄️";
-        snowflake.style.left = Math.random() * 100 + "vw";
-        snowflake.style.fontSize = 10 + Math.random() * 25 + "px";
-        snowflake.style.animationDuration = 5 + Math.random() * 5 + "s";
-        snowflake.style.animationDelay = Math.random() * 2 + "s";
+
+        const left = Math.random() * 100;
+        const size = 10 + Math.random() * 20;
+        const duration = 5 + Math.random() * 5;
+
+        Object.assign(snowflake.style, {
+          left: `${left}vw`,
+          fontSize: `${size}px`,
+          animationDuration: `${duration}s`,
+          top: `-50px`
+        });
 
         document.body.appendChild(snowflake);
         currentCount++;
@@ -267,11 +247,10 @@
         setTimeout(() => {
           snowflake.remove();
           currentCount--;
-        }, 10000);
-      }, 500);
+        }, duration * 1000);
+      }, 300);
     }
 
-    // Snow only on non-mobile or light version on mobile
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
     if (!isMobile) {
       generateSnowflakes();
@@ -279,6 +258,6 @@
       setTimeout(() => generateSnowflakes(), 2000);
     }
   </script>
+
 </body>
 </html>
-
