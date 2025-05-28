@@ -18,15 +18,15 @@
     }
 
     .container {
-      padding: 60px 15px;
+      padding: 80px 20px;
       text-align: center;
       z-index: 2;
       position: relative;
     }
 
     .invite-box {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 30px 20px;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px 30px;
       border-radius: 20px;
       max-width: 800px;
       margin: auto;
@@ -35,14 +35,14 @@
 
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 48px;
+      font-size: 60px;
       margin-bottom: 10px;
       color: #b71c1c;
     }
 
     h2.couple-name,
     .scripted {
-      font-size: 32px;
+      font-size: 36px;
       color: #b71c1c;
       margin: 20px 0;
       font-family: 'Great Vibes', cursive;
@@ -79,26 +79,19 @@
       z-index: 5;
     }
 
-    .snowflake {
+    #play-music {
       position: fixed;
-      top: -10px;
-      z-index: 1;
-      user-select: none;
-      color: white;
-      font-size: 1em;
-      animation: fall linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
+      bottom: 20px;
+      left: 20px;
+      background-color: #b71c1c;
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     @media (max-width: 600px) {
@@ -107,12 +100,12 @@
       }
 
       h1 {
-        font-size: 36px;
+        font-size: 40px;
       }
 
       h2.couple-name,
       .scripted {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       p, a {
@@ -134,22 +127,6 @@
         font-size: 14px;
       }
     }
-
-    /* Play Music Button */
-    #play-music {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #b71c1c;
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      padding: 12px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 100;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
   </style>
 </head>
 <body>
@@ -158,11 +135,9 @@
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
 
   <!-- Play Music Button -->
-  <button id="play-music" onclick="playMusic()">
-    Play Music
-  </button>
+  <button id="play-music" onclick="playMusic()">Play Music</button>
 
-  <!-- Background Music -->
+  <!-- Hidden audio player -->
   <audio id="bg-music">
     <source src="i-cant-wait.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -195,9 +170,8 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Script -->
   <script>
-    // Language toggle
     function toggleLanguage() {
       const english = document.getElementById("english");
       const french = document.getElementById("french");
@@ -214,27 +188,13 @@
       }
     }
 
-    // Snowfall effect
-    setInterval(() => {
-      const snowflake = document.createElement("div");
-      snowflake.classList.add("snowflake");
-      snowflake.textContent = "❄️";
-      snowflake.style.left = Math.random() * 100 + "vw";
-      snowflake.style.animationDuration = 3 + Math.random() * 5 + "s";
-      snowflake.style.fontSize = 10 + Math.random() * 20 + "px";
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 8000);
-    }, 200);
-
-    // Play music
     function playMusic() {
-      const audio = document.getElementById('bg-music');
-      const button = document.getElementById('play-music');
+      const audio = document.getElementById("bg-music");
       audio.play().then(() => {
-        button.style.display = 'none';
-      }).catch(err => {
-        alert("Playback failed. Tap the button again or check browser permissions.");
-        console.error(err);
+        document.getElementById("play-music").style.display = "none";
+      }).catch((e) => {
+        alert("Click interaction required to play music. Please try again.");
+        console.error(e);
       });
     }
   </script>
