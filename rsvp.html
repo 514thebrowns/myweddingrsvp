@@ -42,16 +42,6 @@
       color: #b71c1c;
     }
 
-    p, input, label, textarea {
-      font-size: 18px;
-      color: #333;
-      width: 100%;
-      margin-bottom: 15px;
-      padding: 10px;
-      box-sizing: border-box;
-      border-radius: 8px;
-    }
-
     label {
       text-align: left;
       display: block;
@@ -60,10 +50,13 @@
     }
 
     input, textarea {
-      padding: 15px;
       font-size: 16px;
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
       border: 2px solid #ccc;
       border-radius: 8px;
+      box-sizing: border-box;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
 
@@ -105,7 +98,8 @@
 
     .snowflake {
       position: fixed;
-      top: -50px;
+      top: 0;
+      left: 0;
       color: white;
       font-size: 1em;
       user-select: none;
@@ -153,7 +147,6 @@
 </head>
 <body>
 
-  <!-- Language Toggle Button -->
   <button class="toggle-btn" onclick="toggleLanguage()">FR</button>
 
   <div class="container">
@@ -161,7 +154,7 @@
       <h1 id="rsvp-title">RSVP</h1>
       <h2 id="rsvp-subtitle">Please let us know if you'll be attending!</h2>
 
-      <form action="https://formspree.io/YOUR_EMAIL" method="POST">
+      <form action="https://formspree.io/f/mzzrprbl" method="POST">
         <label for="name" id="name-label">Full Name</label>
         <input type="text" id="name" name="name" required>
 
@@ -237,8 +230,7 @@
         Object.assign(snowflake.style, {
           left: `${left}vw`,
           fontSize: `${size}px`,
-          animationDuration: `${duration}s`,
-          top: `-50px`
+          animationDuration: `${duration}s`
         });
 
         document.body.appendChild(snowflake);
